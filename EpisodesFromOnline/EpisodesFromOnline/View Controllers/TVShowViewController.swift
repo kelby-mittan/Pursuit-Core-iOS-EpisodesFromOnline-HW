@@ -34,14 +34,14 @@ class TVShowViewController: UIViewController {
     var searchQuery = "" {
         didSet {
             DispatchQueue.main.async {
-                self.loadShows(for: self.searchQuery)
+                self.loadShows(for: self.searchQuery.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)
             }
         }
     }
     
     
 
-    func loadShows(for search: String) {        
+    func loadShows(for search: String) {
         TVShowSearchAPI.fetchShows(for: search) { [weak self] (result) in
             switch result {
             case .failure(let appError):
@@ -84,19 +84,25 @@ extension TVShowViewController: UITableViewDelegate {
 extension TVShowViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
         searchBar.resignFirstResponder()
-        
         guard let searchText = searchBar.text else {
             return
         }
-        searchQuery = searchText
-        loadShows(for: searchQuery)
+        searchQuery = searchText.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        TVShowSearchAPI.fetchShows(for: searchQuery) { [weak self] (result) in
+            switch result {
+            case .failure(let appError):
+                print(appError)
+            case .success(let shows):
+                self?.showArr = shows
+            }
+        }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        searchQuery = searchText
+        searchQuery = searchText.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        searchQuery = searchQuery.replacingOccurrences(of: " ", with: "")
         TVShowSearchAPI.fetchShows(for: searchQuery) { [weak self] (result) in
             switch result {
             case .failure(let appError):

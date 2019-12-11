@@ -10,15 +10,15 @@ import XCTest
 @testable import EpisodesFromOnline
 
 class EpisodesFromOnlineTests: XCTestCase {
-
-    func testEpisodes() {
+    
+    func testShows() {
         
         let searchQuery = "seinfeld".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         
         let exp = XCTestExpectation(description: "searches found")
-        let episodesEndpointURL = "https://api.tvmaze.com/singlesearch/shows?q=\(searchQuery)&embed=episodes"
+        let showsEndpointURL = "https://api.tvmaze.com/singlesearch/shows?q=\(searchQuery)&embed=episodes"
         
-        let request = URLRequest(url: URL(string: episodesEndpointURL)!)
+        let request = URLRequest(url: URL(string: showsEndpointURL)!)
         
         NetworkHelper.shared.performDataTask(with: request) { (result) in
             switch result {
@@ -60,5 +60,26 @@ class EpisodesFromOnlineTests: XCTestCase {
         
         wait(for: [exp], timeout: 5.0)
     }
-
+    
+    func testEpisodes() {
+        let id = "530".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        
+        let exp = XCTestExpectation(description: "searches found")
+        let episodesEndpointURL = "https://api.tvmaze.com/shows/\(id)/episodes"
+        
+        let request = URLRequest(url: URL(string: episodesEndpointURL)!)
+        
+        NetworkHelper.shared.performDataTask(with: request) { (result) in
+            switch result {
+            case .failure(let appError):
+                XCTFail("\(appError)")
+            case .success(let data):
+                exp.fulfill()
+                XCTAssertGreaterThan(data.count, 98000, "should be \(data.count)")
+            }
+        }
+        wait(for: [exp], timeout: 5.0)
+    }
 }
+
+
