@@ -13,7 +13,7 @@ class ShowsTableViewCell: UITableViewCell {
     @IBOutlet var showImage: UIImageView!
     @IBOutlet var showLabel: UILabel!
     
-    func configureCell(for show: TVShowSearch) {
+    func configureCell(for show: Shows) {
         showLabel.text = show.name
         
         ImageClient.fetchImage(for: show.image.medium) { [weak self] (result) in

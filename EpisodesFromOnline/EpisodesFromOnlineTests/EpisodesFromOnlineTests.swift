@@ -30,7 +30,35 @@ class EpisodesFromOnlineTests: XCTestCase {
             }
         }
         wait(for: [exp], timeout: 5.0)
+    }
+    
+    func testShowCount() {
         
+        let searchQuery = "seinfeld".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        
+        let exp = XCTestExpectation(description: "searches found")
+        let episodesEndpointURL = "https://api.tvmaze.com/search/shows?q=\(searchQuery)"
+        
+        let request = URLRequest(url: URL(string: episodesEndpointURL)!)
+        
+        NetworkHelper.shared.performDataTask(with: request) { (result) in
+            switch result {
+            case .failure(let appError):
+                XCTFail("\(appError)")
+            case .success(let data):
+                do {
+                    let searchResults = try JSONDecoder().decode([TVShowSearch].self, from: data)
+                    let showArr = searchResults.map { $0.show }
+                    
+                    XCTAssertEqual(showArr.count, 2, "Should be 2")
+                } catch {
+                    XCTFail()
+                }
+                exp.fulfill()
+            }
+        }
+        
+        wait(for: [exp], timeout: 5.0)
     }
 
 }

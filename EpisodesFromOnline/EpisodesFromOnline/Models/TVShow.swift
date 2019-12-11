@@ -9,26 +9,20 @@
 import Foundation
 
 struct TVShowSearch: Decodable {
-    let embedded: [Shows]
-    let name: String
-    let image: Image
+    let show: Shows
     
     private enum CodingKeys: String, CodingKey {
-        case embedded = "_embedded"
-        case name
-        case image
+        case show = "show"
     }
+}
+
+struct Shows: Decodable {
+    let id: Int
+    let name: String
+    let image: Image
 }
 
 struct Image: Decodable {
     let medium: String
     let original: String
-}
-
-struct Shows: Decodable {
-    let episodes: Episode    
-}
-
-struct Episode: Decodable {
-    let name: String
 }
