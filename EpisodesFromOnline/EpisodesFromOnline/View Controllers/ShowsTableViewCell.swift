@@ -14,9 +14,15 @@ class ShowsTableViewCell: UITableViewCell {
     @IBOutlet var showLabel: UILabel!
     
     func configureCell(for show: Shows) {
+        
+        
+        guard let validImage = show.image?.medium else {
+            return
+        }
+        
         showLabel.text = show.name
         
-        ImageClient.fetchImage(for: show.image.medium) { [weak self] (result) in
+        ImageClient.fetchImage(for: validImage) { [weak self] (result) in
             switch result {
             case .success(let image):
                 DispatchQueue.main.async {

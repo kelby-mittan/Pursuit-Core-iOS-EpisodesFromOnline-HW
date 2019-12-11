@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Gs-8K-9XN">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="144" width="414" height="718"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tvShowCell" rowHeight="180" id="DL5-bE-mDZ" customClass="ShowsTableViewCell" customModule="EpisodesFromOnline" customModuleProvider="target">
@@ -53,18 +53,26 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="O56-mH-S4F">
+                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="O56-mH-S4F" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="2kv-xG-Vtq"/>
                             <constraint firstItem="3Gs-8K-9XN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="GgC-r5-wAG"/>
                             <constraint firstItem="3Gs-8K-9XN" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="NQQ-Cy-NDS"/>
-                            <constraint firstItem="3Gs-8K-9XN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="mfz-Nj-MCu"/>
+                            <constraint firstItem="O56-mH-S4F" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="WaP-ir-5hN"/>
+                            <constraint firstItem="O56-mH-S4F" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jbe-JH-Q16"/>
                             <constraint firstItem="3Gs-8K-9XN" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="n2L-zJ-TTU"/>
+                            <constraint firstItem="3Gs-8K-9XN" firstAttribute="top" secondItem="O56-mH-S4F" secondAttribute="bottom" id="wuA-dw-3KD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Shows" id="vaZ-P1-XoD"/>
                     <connections>
+                        <outlet property="searchBar" destination="O56-mH-S4F" id="qGq-Z3-T9l"/>
                         <outlet property="tableView" destination="3Gs-8K-9XN" id="07b-Sz-CsM"/>
                     </connections>
                 </viewController>

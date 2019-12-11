@@ -12,12 +12,15 @@ class TVShowViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     
+    @IBOutlet var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.dataSource = self
         tableView.delegate = self
-        loadShows()
+        searchBar.delegate = self
+        loadShows(for: searchQuery)
     }
     
     var showArr = [Shows]() {
@@ -30,32 +33,21 @@ class TVShowViewController: UIViewController {
     
     var searchQuery = "" {
         didSet {
-            if !searchQuery.isEmpty {
-                TVShowSearchAPI.fetchShows(for: searchQuery) { (result) in
-                    switch result {
-                    case .failure(let appError):
-                        print(appError)
-                    case .success(var shows):
-                        shows = shows.sorted { $0.name < $1.name }
-                        self.showArr = shows.filter { $0.name.lowercased().contains(self.searchQuery.lowercased()) }
-                    }
-                }
+            DispatchQueue.main.async {
+                self.loadShows(for: self.searchQuery)
             }
         }
     }
     
     
 
-    func loadShows() {
-        searchQuery = "seinfeld"
-        
-        TVShowSearchAPI.fetchShows(for: searchQuery) { (result) in
+    func loadShows(for search: String) {        
+        TVShowSearchAPI.fetchShows(for: search) { [weak self] (result) in
             switch result {
             case .failure(let appError):
                 print(appError)
-            case .success(var shows):
-                shows = shows.sorted { $0.name < $1.name }
-                self.showArr = shows.filter { $0.name.lowercased().contains(self.searchQuery.lowercased()) }
+            case .success(let shows):
+                self?.showArr = shows
             }
         }
         print(showArr.count)
@@ -85,6 +77,34 @@ extension TVShowViewController: UITableViewDataSource {
 
 extension TVShowViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 300
+        return 250
     }
+}
+
+extension TVShowViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        searchBar.resignFirstResponder()
+        
+        guard let searchText = searchBar.text else {
+            return
+        }
+        searchQuery = searchText
+        loadShows(for: searchQuery)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        searchQuery = searchText
+        TVShowSearchAPI.fetchShows(for: searchQuery) { [weak self] (result) in
+            switch result {
+            case .failure(let appError):
+                print(appError)
+            case .success(let shows):
+                self?.showArr = shows
+            }
+        }
+    }
+    
 }

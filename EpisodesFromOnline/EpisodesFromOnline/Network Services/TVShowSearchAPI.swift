@@ -32,7 +32,6 @@ struct TVShowSearchAPI {
                     
                     let searchResults = try JSONDecoder().decode([TVShowSearch].self, from: data)
                     
-                    
                     let showArr = searchResults.map { $0.show }
                     
                     completion(.success(showArr))

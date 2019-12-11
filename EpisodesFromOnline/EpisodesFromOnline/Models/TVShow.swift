@@ -17,12 +17,12 @@ struct TVShowSearch: Decodable {
 }
 
 struct Shows: Decodable {
-    let id: Int
-    let name: String
-    let image: Image
+    let id: Int?
+    let name: String?
+    let image: Image?
 }
 
 struct Image: Decodable {
-    let medium: String
-    let original: String
+    let medium: String?
+    let original: String?
 }
