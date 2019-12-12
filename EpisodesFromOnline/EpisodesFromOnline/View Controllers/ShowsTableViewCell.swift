@@ -9,18 +9,18 @@
 import UIKit
 
 class ShowsTableViewCell: UITableViewCell {
-
+    
     @IBOutlet var showImage: UIImageView!
     @IBOutlet var showLabel: UILabel!
     
     func configureCell(for show: Shows) {
         
-        
-        guard let validImage = show.image?.medium else {
-            return
-        }
-        
         showLabel.text = show.name
+        
+        let defaultImage = UIImage(systemName: "exclamationmark.triangle")
+        let tvImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaBEWb6S_3uxUFTVBDm3r0QrEELsC_q374IEhQktjZakD_1nqqNw&s"
+       
+        let validImage = show.image?.medium ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaBEWb6S_3uxUFTVBDm3r0QrEELsC_q374IEhQktjZakD_1nqqNw&s"
         
         ImageClient.fetchImage(for: validImage) { [weak self] (result) in
             switch result {
@@ -29,9 +29,17 @@ class ShowsTableViewCell: UITableViewCell {
                     self?.showImage.image = image
                 }
             case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.showImage.image = defaultImage
+                }
                 print("error \(error)")
             }
         }
+        
+        if validImage == tvImage {
+            showImage.contentMode = .scaleAspectFit
+        }
+        
+        
     }
-
 }

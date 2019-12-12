@@ -15,8 +15,8 @@ class EpisodeCell: UITableViewCell {
     @IBOutlet var seasonEpisodeLabel: UILabel!
     
     
-    func configureCell(for episode: Episode) {
-        
+    
+    func configureCell(for episode: Episode,shows: Shows) {
         
         guard let season = episode.season, let number = episode.number else {
             return
@@ -28,23 +28,24 @@ class EpisodeCell: UITableViewCell {
         
         let defaultImage = UIImage(systemName: "exclamationmark.triangle")
         
-        if let validImage = episode.image?.medium {
-            ImageClient.fetchImage(for: validImage) { [weak self] (result) in
-                switch result {
-                case .success(let image):
-                    DispatchQueue.main.async {
-                        self?.episodeImage.image = image
-                    }
-                case .failure(let error):
-                    DispatchQueue.main.async {
-                        self?.episodeImage.image = defaultImage
-                    }
-                    print("error \(error)")
+        let validImage = episode.image?.medium ?? shows.image?.medium ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaBEWb6S_3uxUFTVBDm3r0QrEELsC_q374IEhQktjZakD_1nqqNw&s"
+        
+        ImageClient.fetchImage(for: validImage) { [weak self] (result) in
+            switch result {
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self?.episodeImage.image = image
                 }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.episodeImage.image = defaultImage
+                }
+                print("error \(error)")
             }
-            
-        } else {
-            episodeImage.image = defaultImage
+        }
+        
+        if validImage != episode.image?.medium {
+            episodeImage.contentMode = .scaleAspectFit
         }
     }
     

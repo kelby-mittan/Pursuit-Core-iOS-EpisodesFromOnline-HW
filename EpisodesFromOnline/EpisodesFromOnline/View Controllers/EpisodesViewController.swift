@@ -46,7 +46,8 @@ class EpisodesViewController: UIViewController {
         guard let episodeVC = segue.destination as? EpisodeDetailController, let indexPath = tableView.indexPathForSelectedRow else {
             fatalError("could not load")
         }
-        episodeVC.episode = episodes[indexPath.row]
+        episodeVC.theEpisode = episodes[indexPath.row]
+        episodeVC.theShow = showSelected
     }
 
     
@@ -66,7 +67,7 @@ extension EpisodesViewController: UITableViewDataSource {
         
         let episode = episodes[indexPath.row]
         
-        cell.configureCell(for: episode)
+        cell.configureCell(for: episode, shows: showSelected!)
         
         return cell
     }

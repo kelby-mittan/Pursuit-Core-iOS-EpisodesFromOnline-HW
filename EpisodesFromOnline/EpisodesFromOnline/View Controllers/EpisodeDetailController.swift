@@ -14,15 +14,16 @@ class EpisodeDetailController: UIViewController {
     @IBOutlet var seasonNumberLabel: UILabel!
     @IBOutlet var summaryTextView: UITextView!
     
-    var episode: Episode?
+    var theEpisode: Episode?
+    var theShow: Shows?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        updateUI()
+        updateUI(episode: theEpisode, show: theShow)
     }
     
-    func updateUI(){
+    func updateUI(episode: Episode?, show: Shows?){
         
         var summary = episode?.summary
         summary = summary?.replacingOccurrences(of: "<p>", with: "")
@@ -39,7 +40,8 @@ class EpisodeDetailController: UIViewController {
         
         let defaultImage = UIImage(systemName: "exclamationmark.triangle")
         
-        if let validImage = episode?.image?.medium {
+        let validImage = episode?.image?.medium ?? show?.image?.medium ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaBEWb6S_3uxUFTVBDm3r0QrEELsC_q374IEhQktjZakD_1nqqNw&s"
+        
             ImageClient.fetchImage(for: validImage) { [weak self] (result) in
                 switch result {
                 case .success(let image):
@@ -54,9 +56,10 @@ class EpisodeDetailController: UIViewController {
                 }
             }
             
-        } else {
-            largeImage.image = defaultImage
-        }
+//        } else {
+//            largeImage.image = defaultImage
+//            largeImage.contentMode = .scaleAspectFit
+//        }
     }
 
     
