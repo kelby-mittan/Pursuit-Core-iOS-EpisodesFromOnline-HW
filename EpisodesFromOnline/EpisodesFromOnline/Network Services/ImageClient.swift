@@ -17,7 +17,7 @@ struct ImageClient {
         }
         
         let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
-                if let error = error {
+            if let error = error {
                 print("error: \(error)")
             }
             

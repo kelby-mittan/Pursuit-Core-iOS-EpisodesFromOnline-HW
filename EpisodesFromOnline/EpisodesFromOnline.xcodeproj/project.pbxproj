@@ -22,6 +22,7 @@
 		024F162323A049DB00CD4B8C /* ShowsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F162223A049DB00CD4B8C /* ShowsTableViewCell.swift */; };
 		024F162523A04AC500CD4B8C /* ImageClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F162423A04AC500CD4B8C /* ImageClient.swift */; };
 		024F184623A1B131007C7253 /* EpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F184523A1B131007C7253 /* EpisodeCell.swift */; };
+		024F184823A1CE0C007C7253 /* EpisodeDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F184723A1CE0C007C7253 /* EpisodeDetailController.swift */; };
 		0276441423A163BD009F869A /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276441323A163BD009F869A /* Episode.swift */; };
 		0276441623A19223009F869A /* EpisodeAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0276441523A19223009F869A /* EpisodeAPIClient.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		024F162223A049DB00CD4B8C /* ShowsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsTableViewCell.swift; sourceTree = "<group>"; };
 		024F162423A04AC500CD4B8C /* ImageClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageClient.swift; sourceTree = "<group>"; };
 		024F184523A1B131007C7253 /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
+		024F184723A1CE0C007C7253 /* EpisodeDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailController.swift; sourceTree = "<group>"; };
 		0276441323A163BD009F869A /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		0276441523A19223009F869A /* EpisodeAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeAPIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,6 +149,7 @@
 			children = (
 				024F161C23A0464E00CD4B8C /* TVShowViewController.swift */,
 				024F161E23A0467D00CD4B8C /* EpisodesViewController.swift */,
+				024F184723A1CE0C007C7253 /* EpisodeDetailController.swift */,
 				024F162223A049DB00CD4B8C /* ShowsTableViewCell.swift */,
 				024F184523A1B131007C7253 /* EpisodeCell.swift */,
 			);
@@ -258,6 +261,7 @@
 				024F161723A0394900CD4B8C /* TVShowSearchAPI.swift in Sources */,
 				024F162323A049DB00CD4B8C /* ShowsTableViewCell.swift in Sources */,
 				024F161F23A0467D00CD4B8C /* EpisodesViewController.swift in Sources */,
+				024F184823A1CE0C007C7253 /* EpisodeDetailController.swift in Sources */,
 				024F161A23A0398300CD4B8C /* TVShow.swift in Sources */,
 				0276441423A163BD009F869A /* Episode.swift in Sources */,
 				024F161D23A0464E00CD4B8C /* TVShowViewController.swift in Sources */,

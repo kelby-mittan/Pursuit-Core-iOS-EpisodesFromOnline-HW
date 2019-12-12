@@ -41,7 +41,14 @@ class EpisodesViewController: UIViewController {
         }
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let episodeVC = segue.destination as? EpisodeDetailController, let indexPath = tableView.indexPathForSelectedRow else {
+            fatalError("could not load")
+        }
+        episodeVC.episode = episodes[indexPath.row]
+    }
+
     
 }
 
