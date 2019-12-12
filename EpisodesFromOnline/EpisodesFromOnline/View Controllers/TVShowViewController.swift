@@ -52,6 +52,14 @@ class TVShowViewController: UIViewController {
         }
         print(showArr.count)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let episodeVC = segue.destination as? EpisodesViewController, let indexPath = tableView.indexPathForSelectedRow else {
+            fatalError("could not load")
+        }
+        episodeVC.showSelected = showArr[indexPath.row]
+    }
 
 }
 
