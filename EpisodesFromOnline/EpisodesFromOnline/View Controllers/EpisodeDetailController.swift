@@ -40,7 +40,7 @@ class EpisodeDetailController: UIViewController {
         
         let defaultImage = UIImage(systemName: "exclamationmark.triangle")
         
-        let validImage = episode?.image?.medium ?? show?.image?.medium ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaBEWb6S_3uxUFTVBDm3r0QrEELsC_q374IEhQktjZakD_1nqqNw&s"
+        let validImage = episode?.image?.original ?? show?.image?.medium ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaBEWb6S_3uxUFTVBDm3r0QrEELsC_q374IEhQktjZakD_1nqqNw&s"
         
             ImageClient.fetchImage(for: validImage) { [weak self] (result) in
                 switch result {
@@ -55,12 +55,9 @@ class EpisodeDetailController: UIViewController {
                     print("error \(error)")
                 }
             }
-            
-//        } else {
-//            largeImage.image = defaultImage
-//            largeImage.contentMode = .scaleAspectFit
-//        }
+        
+        if validImage != episode?.image?.original {
+            largeImage.contentMode = .scaleAspectFit
+        }
     }
-
-    
 }

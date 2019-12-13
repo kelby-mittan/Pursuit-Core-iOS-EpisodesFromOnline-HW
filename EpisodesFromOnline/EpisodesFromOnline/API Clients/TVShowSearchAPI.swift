@@ -12,9 +12,6 @@ import Foundation
 struct TVShowSearchAPI {
     static func fetchShows(for searchQuery: String, completion: @escaping (Result<[Shows], AppError>) -> ()) {
         
-        // "http://api.tvmaze.com/singlesearch/shows?q=\(searchQuery)&embed=episodes"
-        // http://api.tvmaze.com/search/shows?q=seinfeld
-        
         let showEndpointURL = "https://api.tvmaze.com/search/shows?q=\(searchQuery)"
         
         guard let url = URL(string: showEndpointURL) else {

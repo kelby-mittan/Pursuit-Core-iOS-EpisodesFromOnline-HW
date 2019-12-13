@@ -101,12 +101,14 @@
 		024E77ED239E96E700FCCFC3 /* EpisodesFromOnline */ = {
 			isa = PBXGroup;
 			children = (
-				024F161823A0395400CD4B8C /* Models */,
 				024F161123A0388300CD4B8C /* Network Services */,
+				025102AD23A2DA35008EEFC9 /* API Clients */,
+				025102AC23A2DA0E008EEFC9 /* Custom Cells */,
+				024F161823A0395400CD4B8C /* Models */,
 				024F161B23A045E200CD4B8C /* View Controllers */,
+				024E77F4239E96E700FCCFC3 /* Main.storyboard */,
 				024E77EE239E96E700FCCFC3 /* AppDelegate.swift */,
 				024E77F0239E96E700FCCFC3 /* SceneDelegate.swift */,
-				024E77F4239E96E700FCCFC3 /* Main.storyboard */,
 				024E77F7239E96EC00FCCFC3 /* Assets.xcassets */,
 				024E77F9239E96EC00FCCFC3 /* LaunchScreen.storyboard */,
 				024E77FC239E96EC00FCCFC3 /* Info.plist */,
@@ -128,8 +130,6 @@
 			children = (
 				024F161223A038A100CD4B8C /* AppError.swift */,
 				024F161423A038CA00CD4B8C /* NetworkHelper.swift */,
-				024F161623A0394900CD4B8C /* TVShowSearchAPI.swift */,
-				0276441523A19223009F869A /* EpisodeAPIClient.swift */,
 				024F162423A04AC500CD4B8C /* ImageClient.swift */,
 			);
 			path = "Network Services";
@@ -150,10 +150,26 @@
 				024F161C23A0464E00CD4B8C /* TVShowViewController.swift */,
 				024F161E23A0467D00CD4B8C /* EpisodesViewController.swift */,
 				024F184723A1CE0C007C7253 /* EpisodeDetailController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		025102AC23A2DA0E008EEFC9 /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
 				024F162223A049DB00CD4B8C /* ShowsTableViewCell.swift */,
 				024F184523A1B131007C7253 /* EpisodeCell.swift */,
 			);
-			path = "View Controllers";
+			path = "Custom Cells";
+			sourceTree = "<group>";
+		};
+		025102AD23A2DA35008EEFC9 /* API Clients */ = {
+			isa = PBXGroup;
+			children = (
+				0276441523A19223009F869A /* EpisodeAPIClient.swift */,
+				024F161623A0394900CD4B8C /* TVShowSearchAPI.swift */,
+			);
+			path = "API Clients";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
