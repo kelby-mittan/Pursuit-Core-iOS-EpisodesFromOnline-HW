@@ -39,7 +39,10 @@ class ShowsTableViewCell: UITableViewCell {
         if validImage == tvImage {
             showImage.contentMode = .scaleAspectFit
         }
-        
-        
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        showImage.image = nil
     }
 }

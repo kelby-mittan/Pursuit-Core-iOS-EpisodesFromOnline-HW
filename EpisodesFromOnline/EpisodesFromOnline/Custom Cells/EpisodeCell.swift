@@ -48,5 +48,9 @@ class EpisodeCell: UITableViewCell {
             episodeImage.contentMode = .scaleAspectFit
         }
     }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        episodeImage.image = nil
+    }
     
 }
